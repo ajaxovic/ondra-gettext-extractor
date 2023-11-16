@@ -6,6 +6,7 @@
 		{"name": "Karel Klima"}
 	],
 	"version": "4.1.0",
+	"minimum-stability": "dev",
 	"keywords":["gettext", "l10n"],
 	"license": "BSD-3-Clause",
 	"config": {
