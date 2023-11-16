@@ -30,7 +30,7 @@ Usage
 	                can be specified several times
 	  -mKEY:VALUE   set meta header
 
-e.g.: `./vendor/bin/gettext-extractor -o outup/file.pot -f files/to/extract/`
+e.g.: `./vendor/bin/ondra-gettext-extractor -o outup/file.pot -f files/to/extract/`
 
 Supported file types
 --------------------
