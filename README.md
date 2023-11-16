@@ -10,6 +10,18 @@ Tool for extracting gettext phrases from PHP files and Latte templates. Output i
 Installation
 ------------
 To install gettext-extractor install it with [composer](https://getcomposer.org/):
+
+`
+"repositories": [
+    {
+        "url": "https://github.com/Too-d0p3/ondra-gettext-extractor.git",
+        "type": "git"
+    },
+    "require": {
+        "ondra/gettext-extractor": "@dev"
+    }
+],`
+
 `$ composer require --dev voda/gettext-extractor`
 
 Alternatively you can download a standalone PHAR file from [releases page](https://github.com/voda/gettext-extractor/releases).
