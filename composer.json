@@ -1,10 +1,11 @@
 {
-	"name": "voda/gettext-extractor",
+	"name": "ondra/gettext-extractor",
 	"description": "tool for extracting gettext messages",
 	"authors": [
 		{"name": "Ondřej Vodáček", "email": "ondrej.vodacek@gmail.com"},
 		{"name": "Karel Klima"}
 	],
+	"version": "4.1.0",
 	"keywords":["gettext", "l10n"],
 	"license": "BSD-3-Clause",
 	"config": {
