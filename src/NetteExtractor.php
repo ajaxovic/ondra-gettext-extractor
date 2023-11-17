@@ -14,94 +14,94 @@ use Latte\Engine;
 
 class NetteExtractor extends Extractor {
 
-	public function __construct(Engine $engine, array $nodes = [], string $logToFile = 'php://stderr') {
-		parent::__construct($logToFile);
+    public function __construct(Engine $engine, array $nodes = [], string $logToFile = 'php://stderr') {
+        parent::__construct($logToFile);
 
-		// Clean up...
-		$this->removeAllFilters();
+        // Clean up...
+        $this->removeAllFilters();
 
-		// Set basic filters
-		$this->setFilter('php', 'PHP')
-				->setFilter('phtml', 'PHP')
-				->setFilter('phtml', 'Latte')
-				->setFilter('latte', 'PHP')
-				->setFilter('latte', 'Latte');
+        // Set basic filters
+        $this->setFilter('php', 'PHP')
+            ->setFilter('phtml', 'PHP')
+            ->setFilter('phtml', 'Latte')
+            ->setFilter('latte', 'PHP')
+            ->setFilter('latte', 'Latte');
 
-        if(class_exists(Jolanda\Latte\Macros\TranslateNode::class) && !in_array(Jolanda\Latte\Macros\TranslateNode::class, $nodes)) {
-            $nodes[] = Jolanda\Latte\Macros\TranslateNode::class;
+        if(class_exists('Jolanda\Latte\Macros\TranslateNode') && !in_array('Jolanda\Latte\Macros\TranslateNode', $nodes)) {
+            $nodes[] = 'Jolanda\Latte\Macros\TranslateNode';
         }
 
-		$this->addFilter('Latte', new Filters\Latte3Filter($engine, $nodes));
+        $this->addFilter('Latte', new Filters\Latte3Filter($engine, $nodes));
 
-		$phpFilter = $this->getFilter('PHP');
-		assert($phpFilter instanceof PHPFilter);
+        $phpFilter = $this->getFilter('PHP');
+        assert($phpFilter instanceof PHPFilter);
 
-		$phpFilter->addFunction('translate');
+        $phpFilter->addFunction('translate');
 
-		$latteFilter = $this->getFilter('Latte');
-		assert($latteFilter instanceof Latte3Filter);
+        $latteFilter = $this->getFilter('Latte');
+        assert($latteFilter instanceof Latte3Filter);
 
-		$latteFilter->addFunction('!_')
-				->addFunction('_');
-	}
+        $latteFilter->addFunction('!_')
+            ->addFunction('_');
+    }
 
-	/**
-	 * Optional setup of Forms translations
-	 *
-	 * @return self
-	 */
-	public function setupForms(): self {
-		$php = $this->getFilter('PHP');
-		assert($php instanceof PHPFilter);
+    /**
+     * Optional setup of Forms translations
+     *
+     * @return self
+     */
+    public function setupForms(): self {
+        $php = $this->getFilter('PHP');
+        assert($php instanceof PHPFilter);
 
-		$php->addFunction('setText')
-				->addFunction('setEmptyValue')
-				->addFunction('setValue')
-				->addFunction('addButton', 2)
-				->addFunction('addCheckbox', 2)
-				->addFunction('addError')
-				->addFunction('addFile', 2) // Nette 0.9
-				->addFunction('addGroup')
-				->addFunction('addImage', 3)
-				->addFunction('addMultiSelect', 2)
-				->addFunction('addMultiSelect', 3)
-				->addFunction('addPassword', 2)
-				->addFunction('addRadioList', 2)
-				->addFunction('addRadioList', 3)
-				->addFunction('addRule', 2)
-				->addFunction('addSelect', 2)
-				->addFunction('addSelect', 3)
-				->addFunction('addSubmit', 2)
-				->addFunction('addText', 2)
-				->addFunction('addTextArea', 2)
-				->addFunction('addUpload', 2) // Nette 2.0
-				->addFunction('setRequired')
-				->addFunction('setDefaultValue')
-				->addFunction('skipFirst') // Nette 0.9
-				->addFunction('setPrompt') // Nette 2.0
-				->addFunction('addProtection');
+        $php->addFunction('setText')
+            ->addFunction('setEmptyValue')
+            ->addFunction('setValue')
+            ->addFunction('addButton', 2)
+            ->addFunction('addCheckbox', 2)
+            ->addFunction('addError')
+            ->addFunction('addFile', 2) // Nette 0.9
+            ->addFunction('addGroup')
+            ->addFunction('addImage', 3)
+            ->addFunction('addMultiSelect', 2)
+            ->addFunction('addMultiSelect', 3)
+            ->addFunction('addPassword', 2)
+            ->addFunction('addRadioList', 2)
+            ->addFunction('addRadioList', 3)
+            ->addFunction('addRule', 2)
+            ->addFunction('addSelect', 2)
+            ->addFunction('addSelect', 3)
+            ->addFunction('addSubmit', 2)
+            ->addFunction('addText', 2)
+            ->addFunction('addTextArea', 2)
+            ->addFunction('addUpload', 2) // Nette 2.0
+            ->addFunction('setRequired')
+            ->addFunction('setDefaultValue')
+            ->addFunction('skipFirst') // Nette 0.9
+            ->addFunction('setPrompt') // Nette 2.0
+            ->addFunction('addProtection');
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Optional setup of DataGrid component translations
-	 *
-	 * @return self
-	 */
-	public function setupDataGrid(): self {
-		$php = $this->getFilter('PHP');
-		assert($php instanceof PHPFilter);
+    /**
+     * Optional setup of DataGrid component translations
+     *
+     * @return self
+     */
+    public function setupDataGrid(): self {
+        $php = $this->getFilter('PHP');
+        assert($php instanceof PHPFilter);
 
-		$php->addFunction('addColumn', 2)
-				->addFunction('addNumericColumn', 2)
-				->addFunction('addDateColumn', 2)
-				->addFunction('addCheckboxColumn', 2)
-				->addFunction('addImageColumn', 2)
-				->addFunction('addPositionColumn', 2)
-				->addFunction('addActionColumn')
-				->addFunction('addAction');
+        $php->addFunction('addColumn', 2)
+            ->addFunction('addNumericColumn', 2)
+            ->addFunction('addDateColumn', 2)
+            ->addFunction('addCheckboxColumn', 2)
+            ->addFunction('addImageColumn', 2)
+            ->addFunction('addPositionColumn', 2)
+            ->addFunction('addActionColumn')
+            ->addFunction('addAction');
 
-		return $this;
-	}
+        return $this;
+    }
 }
