@@ -10,10 +10,11 @@ namespace Vodacek\GettextExtractor;
 
 use Vodacek\GettextExtractor\Filters\LatteFilter;
 use Vodacek\GettextExtractor\Filters\PHPFilter;
+use Latte\Engine;
 
 class NetteExtractor extends Extractor {
 
-	public function __construct(string $logToFile = 'php://stderr') {
+	public function __construct(Engine $engine, array $nodes = [], string $logToFile = 'php://stderr') {
 		parent::__construct($logToFile);
 
 		// Clean up...
@@ -26,7 +27,11 @@ class NetteExtractor extends Extractor {
 				->setFilter('latte', 'PHP')
 				->setFilter('latte', 'Latte');
 
-		$this->addFilter('Latte', new Filters\LatteFilter());
+        if(class_exists(Jolanda\Latte\Macros\TranslateNode::class) && !in_array(Jolanda\Latte\Macros\TranslateNode::class, $nodes)) {
+            $nodes[] = Jolanda\Latte\Macros\TranslateNode::class;
+        }
+
+		$this->addFilter('Latte', new Filters\Latte3Filter($engine, $nodes));
 
 		$phpFilter = $this->getFilter('PHP');
 		assert($phpFilter instanceof PHPFilter);
@@ -34,7 +39,7 @@ class NetteExtractor extends Extractor {
 		$phpFilter->addFunction('translate');
 
 		$latteFilter = $this->getFilter('Latte');
-		assert($latteFilter instanceof LatteFilter);
+		assert($latteFilter instanceof Latte3Filter);
 
 		$latteFilter->addFunction('!_')
 				->addFunction('_');
