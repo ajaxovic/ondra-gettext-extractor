@@ -20,7 +20,6 @@ use Latte\Compiler\TemplateParser;
 class Latte3Filter extends AFilter implements IFilter {
     public array $nodes;
     public Engine $engine;
-    private TemplateParser $parser;
 
     public function __construct(Engine $engine, array $nodes) {
         $this->nodes = $nodes;
@@ -31,21 +30,27 @@ class Latte3Filter extends AFilter implements IFilter {
 
     private function initEngine(){
         $this->engine->setStrictParsing(false);
+    }
 
-        $this->parser = new TemplateParser();
+    private function initParser(): TemplateParser
+    {
+        $parser = new TemplateParser();
 
         foreach ($this->engine->getExtensions() as $extension){
             $extension->beforeCompile($this->engine);
-            $this->parser->addTags($extension->getTags());
+            $parser->addTags($extension->getTags());
         }
 
-        $this->parser->setPolicy($this->engine->getPolicy(true));
+        $parser->setPolicy($this->engine->getPolicy(true));
+
+        return $parser;
     }
 
     public function extract(string $file): array {
         $data = [];
 
-        $node = $this->parser->parse(FileSystem::read($file));
+        $parser = $this->initParser();
+        $node = $parser->parse(FileSystem::read($file));
         $this->engine->applyPasses($node);
 
         if($node->head){
