@@ -14,26 +14,6 @@ To install gettext-extractor install it with [composer](https://getcomposer.org/
 
 `$ composer require ondra/gettext-extractor`
 
-Alternatively you can download a standalone PHAR file from [releases page](https://github.com/Too-d0p3/ondra-gettext-extractor/releases).
-
-Usage
------
-`./vendor/bin/gettext-extractor [options]`
-
-	Options:
-	  -h            display this help and exit
-	  -oFILE        output file, default output is stdout
-	  -lFILE        log file, default is stderr
-	  -fFILE        file to extract, can be specified several times
-	  -kFUNCTION    add FUNCTION to filters, format is:
-	                FILTER:FUNCTION_NAME:SINGULAR,PLURAL,CONTEXT
-	                default FILTERs are PHP and Latte
-	                for SINGULAR, PLURAL and CONTEXT '0' means not set
-	                can be specified several times
-	  -mKEY:VALUE   set meta header
-
-e.g.: `./vendor/bin/gettext-extractor -o outup/file.pot -f files/to/extract/`
-
 Supported file types
 --------------------
 * .php
