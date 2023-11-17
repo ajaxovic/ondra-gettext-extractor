@@ -12,8 +12,6 @@ Installation
 ------------
 To install gettext-extractor install it with [composer](https://getcomposer.org/):
 
-`
-
 `$ composer require ondra/gettext-extractor`
 
 Alternatively you can download a standalone PHAR file from [releases page](https://github.com/Too-d0p3/ondra-gettext-extractor/releases).
