@@ -2,10 +2,11 @@
 	"name": "ondra/gettext-extractor",
 	"description": "tool for extracting gettext messages",
 	"authors": [
+		{"name": "Ondřej Nevřela", "email": "ondra.nevrela@gmail.com"},
 		{"name": "Ondřej Vodáček", "email": "ondrej.vodacek@gmail.com"},
 		{"name": "Karel Klima"}
 	],
-	"version": "4.1.0",
+	"version": "1.0.0",
 	"minimum-stability": "dev",
 	"keywords":["gettext", "l10n"],
 	"license": "BSD-3-Clause",
@@ -21,19 +22,7 @@
 	"autoload": {
 		"psr-4": {"Vodacek\\GettextExtractor\\" : "src"}
 	},
-	"autoload-dev": {
-		"psr-4": {
-			"Vodacek\\GettextExtractor\\Tests\\Unit\\": "tests/unit",
-			"Vodacek\\GettextExtractor\\Tests\\Integration\\": "tests/integration"
-		}
-	},
 	"bin": [
 		"gettext-extractor.php"
-	],
-	"require-dev": {
-		"phpstan/phpstan": "^0.11.5",
-		"phpstan/phpstan-phpunit": "^0.11.0",
-		"phpstan/phpstan-strict-rules": "^0.11.0",
-		"phpunit/phpunit": "^8"
-	}
+	]
 }
