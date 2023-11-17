@@ -4,7 +4,7 @@ Tool for extracting gettext phrases from PHP files and Latte templates. Output i
 
 Fork of [voda/gettext-extractor](https://github.com/voda/gettext-extractor). Implements Latte3 support and more.
 
-[![Latest Stable Version](https://poser.pugx.org/voda/gettext-extractor/v/stable)](https://packagist.org/packages/ondra/gettext-extractor)
+[![Latest Stable Version](https://poser.pugx.org/ondra/gettext-extractor/v/stable)](https://packagist.org/packages/ondra/gettext-extractor)
 [![Total Downloads](https://poser.pugx.org/ondra/gettext-extractor/downloads)](https://packagist.org/packages/ondra/gettext-extractor)
 [![License](https://poser.pugx.org/ondra/gettext-extractor/license)](https://packagist.org/packages/ondra/gettext-extractor)
 
