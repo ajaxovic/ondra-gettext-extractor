@@ -12,6 +12,7 @@ use Latte\Compiler\TemplateLexer;
 use Latte\Compiler\TokenStream;
 use Nette\Utils\FileSystem;
 use Latte\Compiler\Nodes\FragmentNode;
+use Latte\Compiler\Nodes\Html\ElementNode;
 use Latte\Compiler\Nodes\Php\Scalar\StringNode;
 use Latte;
 use Latte\Engine;
@@ -71,8 +72,38 @@ class Latte3Filter extends AFilter implements IFilter {
     }
 
     private function processNode($node, array &$data){
-        if($node instanceof FragmentNode){
+        if($node instanceof ElementNode){
+            if($node->attributes){
+                if($node->attributes instanceof FragmentNode){
+                    $this->processFragmentNode($node->attributes, $data);
+                }else{
+                    $this->processNode($node->attributes, $data);
+                }
+            }
+
+            if($node->content){
+                foreach ($node->content as $n){
+                    if($n instanceof FragmentNode){
+                        $this->processFragmentNode($n, $data);
+                    }else{
+                        $this->processNode($n, $data);
+                    }
+                }
+            }
+        }else if($node instanceof FragmentNode){
             $this->processFragmentNode($node);
+        }else if($node instanceof Latte\Compiler\Node){
+            $vars = get_object_vars($node);
+
+            if($vars){
+                foreach ($vars as $v){
+                    if($v instanceof FragmentNode){
+                        $this->processFragmentNode($v, $data);
+                    }else if($v instanceof Latte\Compiler\Node){
+                        $this->processNode($v, $data);
+                    }
+                }
+            }
         }
 
         $isTranslateNode = false;
