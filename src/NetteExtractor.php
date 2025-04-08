@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Vodacek\GettextExtractor;
 
-use Vodacek\GettextExtractor\Filters\LatteFilter;
 use Vodacek\GettextExtractor\Filters\PHPFilter;
+use Vodacek\GettextExtractor\Filters\Latte3Filter;
 use Latte\Engine;
 
 class NetteExtractor extends Extractor {
@@ -31,7 +31,7 @@ class NetteExtractor extends Extractor {
             $nodes[] = 'Jolanda\Latte\Macros\TranslateNode';
         }
 
-        $this->addFilter('Latte', new Filters\Latte3Filter($engine, $nodes));
+        $this->addFilter('Latte', new Latte3Filter($engine, $nodes));
 
         $phpFilter = $this->getFilter('PHP');
         assert($phpFilter instanceof PHPFilter);
