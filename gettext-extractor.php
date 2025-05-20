@@ -94,8 +94,7 @@ if (isset($options['m'])) {
 
 
 $engine = new Latte\Engine;
-$extension = new Latte\Essential\TranslatorExtension(null);
-$engine->addExtension($extension);
+$engine->addExtension(new Latte\Essential\TranslatorExtension(null));
 $engine->addExtension(new Latte\Essential\RawPhpExtension);
 
 $extractor = new Vodacek\GettextExtractor\NetteExtractor($engine, [], $log);
