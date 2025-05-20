@@ -92,7 +92,7 @@ if (isset($options['m'])) {
 	}
 }
 
-$extractor = new Vodacek\GettextExtractor\NetteExtractor($log);
+$extractor = new Vodacek\GettextExtractor\NetteExtractor(new Latte\Engine, [], $log);
 $extractor->setupForms()->setupDataGrid();
 if ($keywords !== null) {
 	foreach ($keywords as $value) {
