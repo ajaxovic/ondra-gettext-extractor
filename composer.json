@@ -17,7 +17,7 @@
 		"php": ">=8.0",
 		"latte/latte": "^3.0",
 		"nette/utils": "^3.0 || ^4.0",
-		"nikic/php-parser": "^4.2"
+		"nikic/php-parser": "^5"
 	},
 	"autoload": {
 		"psr-4": {"Vodacek\\GettextExtractor\\" : "src"}
